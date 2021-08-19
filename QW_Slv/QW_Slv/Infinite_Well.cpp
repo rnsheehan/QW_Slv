@@ -37,8 +37,8 @@ void inf_well::set_well_params(double length, double mass, double centre_positio
 		}
 		else{
 			std::string reason = "Error: void inf_well::set_well_params(double length, double mass, double centre_position)\n"; 
-			if(!c1) "length is not positive\n"; 
-			if(!c2) "mass is not positive\n"; 
+			if(!c1) reason += "length is not positive\n"; 
+			if(!c2) reason += "mass is not positive\n"; 
 			throw std::invalid_argument(reason); 
 		}
 

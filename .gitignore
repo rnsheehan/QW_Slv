@@ -408,3 +408,13 @@ ASALocalRun/
 *.apps
 *.ipch
 *.ipch
+QW_Slv/.vs/QW_Slv/v16/.suo
+*.db
+*.ilk
+QW_Slv/Debug/QW_Slv.pdb
+QW_Slv/QW_Slv/Debug/QW_Slv.exe.recipe
+QW_Slv/QW_Slv/Debug/QW_Slv.log
+QW_Slv/QW_Slv/Debug/QW_Slv.tlog/CL.command.1.tlog
+QW_Slv/QW_Slv/Debug/QW_Slv.tlog/CL.read.1.tlog
+*.tlog
+*.lastbuildstate

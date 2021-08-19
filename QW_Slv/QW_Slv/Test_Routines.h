@@ -6,6 +6,10 @@
 
 namespace testing{
 
+	void energy_unit_conversion(); 
+
+	void potential_step(); 
+
 	void infinite_well(); 
 
 }

@@ -1,7 +1,7 @@
 #ifndef INFINITE_WELL_H
 #define INFINITE_WELL_H
 
-// Implementation of a class that returns the properties of an infinite square well
+// Implementation of a class that computes the solution of an infinite square well
 // For calculation details see Bransden and Joachain.
 // R. Sheehan 24 - 10 - 2016
 

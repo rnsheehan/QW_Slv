@@ -2,6 +2,26 @@
 #include "Attach.h"
 #endif
 
+void testing::energy_unit_conversion()
+{
+	// what sort of values do we get when talking about eV and J
+	// R. Sheehan 19 - 8 - 2021
+
+	for (int i = 1; i < 11; i++) {
+		std::cout << i << " eV = " << template_funcs::convert_ev_J((double)(i)) << " J\n"; 
+	}
+}
+
+void testing::potential_step()
+{
+	// test the potential step calculation
+	// R. Sheehan 19 - 8 - 2021
+
+	pot_step classical; 
+
+	classical.set_params(M_ELECTRON_KG, 1.05, 1); 
+}
+
 void testing::infinite_well()
 {
 	// test the implementation of the code for the infinite square well
@@ -13,7 +33,7 @@ void testing::infinite_well()
 	inf_well the_well(length, M_ELECTRON_KG); 
 
 	for(int i = 1; i < 5; i++){
-		std::cout<<"Energy of level "<<i<<": "<< the_well.energy_eigenvalue(i, false) <<"\n"; 
+		std::cout<<"Energy of level "<<i<<": "<< the_well.energy_eigenvalue(i) <<"\n"; 
 	}
 
 	std::cout<<"\n";

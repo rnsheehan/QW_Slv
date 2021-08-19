@@ -6,7 +6,11 @@
 
 int main(int argc, char* argv[])
 {
-	testing::infinite_well(); 
+	//testing::energy_unit_conversion(); 
+
+	testing::potential_step(); 
+
+	//testing::infinite_well(); 
 
 	std::cout<<"Press enter to close\n"; 
 	std::cin.get(); 

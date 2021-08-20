@@ -37,6 +37,9 @@ static const double H_BAR_J = 1.05457e-34; // hbar = Planck's constant over 2 pi
 static const double H_BAR_eV = 6.5822e-16; // hbar = Planck's constant over 2 pi in eVs
 //static const double One_H_BAR = 9.482534e+33; // 1/hbar
 
+static const std::string empty_str = "";
+static const std::string dottxt = ".txt";
+
 static const std::complex<double> zero(0.0, 0.0);
 static const std::complex<double> eye(0.0, 1.0);
 static const std::complex<double> one(1.0, 0.0);

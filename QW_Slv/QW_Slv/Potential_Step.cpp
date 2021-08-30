@@ -49,6 +49,8 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 				t1 = (eye * p1 * 1.0e-9) / H_BAR_J; // scale length to nm
 				t2 = (eye * p2 * 1.0e-9) / H_BAR_J; // scale length to nm
 
+				std::cout << "B = " << B << " , C = " << C << " , A = " << A << "\n"; 
+				std::cout << "p1 = " << p1 << " , p2 = " << p2 << "\n"; 
 				std::cout << "t1 = " << t1 << " , t2 = " << t2 << "\n"; 
 				std::cout << "T = " << T << ", R = " << R << ", T+R = " << T + R << "\n";
 			}
@@ -63,9 +65,15 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 				DD = (B / 2) * (one - eye * D); 
 				R = 1.0; 
 				T = 0.0; 
+				
+				t1 = (eye * p1 * 1.0e-9) / H_BAR_J;
+				t2 = (-1.0e-9 * p2) / H_BAR_J;
+
+
+				std::cout << "CC = " << CC << " , DD = " << DD << " , B = " << B << "\n";
+				std::cout << "p1 = " << p1 << " , p2 = " << p2 << "\n";
+				std::cout << "t1 = " << t1 << " , t2 = " << t2 << "\n";
 				std::cout << "T = " << T << ", R = " << R << ", T+R = " << T + R << "\n";
-				t1 = (eye * p1) / H_BAR_J;
-				t2 = -1.0* p2 / H_BAR_J;
 			}
 
 			params_defined = true; 
@@ -111,7 +119,7 @@ std::complex<double> pot_step::wavefunction(double position)
 				}
 				else {
 					// outgoing exponential decay
-					return ( B * exp(-1.0 * t2 * position) ); 
+					return ( B * exp(t2 * position) ); 
 				}
 			}
 		}
@@ -140,7 +148,7 @@ void pot_step::compute_wavefunction(std::string filename)
 
 			if (write.is_open()) {
 
-				int nn = 101; 
+				int nn = 501; 
 				double x0 = -3.0, dx = (2.0*fabs(x0)) / static_cast<double>(nn-1);
 				std::complex<double> psi; 
 

@@ -19,7 +19,7 @@ void testing::potential_step()
 
 	pot_step classical; 
 
-	classical.set_params(M_ELECTRON_KG, 2, 1); 
+	classical.set_params(M_ELECTRON_KG, 1.5, 1); 
 
 	classical.compute_wavefunction("Step_Solution.txt"); 
 }

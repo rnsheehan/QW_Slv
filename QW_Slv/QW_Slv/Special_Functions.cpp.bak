@@ -5,6 +5,145 @@
 // Definition of the special functions declared in the namespace
 // R. Sheehan 23 - 11 - 2015
 
+void special::gser(double *gamser,double a,double x,double *gln)
+{
+	// This function returns the incomplete gamma function P(a,x), calculated by its series representation
+	// Also returns ln[gamma(a)] as gln
+
+	int n;
+	double sum,del,ap;
+
+	static const int ITMAX=(100);
+	static const double EPS=(3.0e-7);
+
+	*gln=gammln(a);
+	if(x<=0.0){
+		if(x<0.0)
+			std::cerr<<"x less than 0 in routine GSER"<<"\n";
+		*gamser=0.0;
+		return;
+	}else{
+		ap=a;
+		del=sum=1.0/a;
+		for(n=1;n<=ITMAX;n++){
+			ap+=1.0;
+			del*=x/ap;
+			sum+=del;
+			if(fabs(del)<fabs(sum)*EPS){
+				*gamser=sum*exp(-x+a*log(x)-(*gln));
+				return;
+			}
+		}
+		std::cerr<<"a too large, ITMAX too small in routine GSER"<<"\n";
+		return;
+	}
+}
+
+void special::gcf(double *gammcf, double a, double x, double *gln)
+{
+	// This function returns the incomplete gamma function Q(a,x), calculated by its continued fraction representation
+	// Also returns ln[gamma(a)] as gln
+
+	int n;
+	double gold=0.0,g,fac=1.0,b1=1.0;
+	double b0=0.0,anf,ana,an,a1,a0=1.0;
+
+	static const int ITMAX=(100);
+	static const double EPS=(3.0e-7);
+
+	*gln=gammln(a);
+	a1=x;
+	for(n=1;n<=ITMAX;n++){
+		an=static_cast<double>(n);
+		ana=an-a;
+		a0=(a1+a0*ana)*fac;
+		b0=(b1+b0*ana)*fac;
+		anf=an*fac;
+		a1=x*a0+anf*a1;
+		b1=x*b0+anf*b1;
+		if(a1){
+			fac=1.0/a1;
+			g=b1*fac;
+			if(fabs((g-gold)/g)<EPS){
+				*gammcf=exp(-x+a*log(x)-(*gln))*g;
+				return;
+			}
+			gold=g;
+		}
+	}
+	std::cerr<<"a too large, ITMAX too small in routine GCF"<<"\n";
+}
+
+double special::gammp(double a,double x)
+{
+	// Computes the incomplete gamma function P(a,x) from the functions gser and gcf
+
+	double gamser,gammcf,gln;
+
+	if(x<0.0||a<=0.0) 
+		std::cerr<<"Invalid arguments in routine GAMMP"<<"\n";
+	if(x<(a+1.0)){
+		gser(&gamser,a,x,&gln);
+		return gamser;
+	} 
+	else{
+		gcf(&gammcf,a,x,&gln);
+		return 1.0-gammcf;
+	}
+}
+
+double special::gammq(double a,double x)
+{
+	// Computes the incomplete gamma function Q(a,x)=1-P(a,x) from the functions gser and gcf
+
+	double gamser,gammcf,gln;
+
+	if(x < 0.0 || a <= 0.0){
+		std::cerr<<"Invalid arguments in routine GAMMQ"<<"\n";
+	}
+	if(x<(a+1.0)){
+		gser(&gamser,a,x,&gln);
+		return 1.0-gamser;
+	} 
+	else{
+		gcf(&gammcf,a,x,&gln);
+		return gammcf;
+	}
+}
+
+double special::gammln(double xx)
+{
+	// Return the value of ln[gamma(xx)] for xx>0
+
+	double x,tmp,ser;
+	static double cof[6]={76.18009173,-86.50532033,24.01409822,-1.231739516,0.120858003e-2,-0.536382e-5};
+	int j;
+
+	x=xx-1.0;
+	tmp=x+5.5;
+	tmp-=(x+0.5)*log(tmp);
+	ser=1.0;
+	for (j=0;j<=5;j++){
+		x+=1.0;
+		ser+=(cof[j]/x);
+	}
+	return -tmp+log(2.50662827465*ser);
+}
+
+double special::erff(double x)
+{
+	// Return the error function erf(x)
+
+	return ( x < 0.0 ? -gammp(0.5, template_funcs::DSQR(x) ) : gammp(0.5, template_funcs::DSQR(x) ) ) ; 
+}
+
+double special::erffc(double x)
+{
+	// Return the complementary error function erfc(x)
+
+	return ( x < 0.0 ? 1.0 + gammp(0.5, template_funcs::DSQR(x) ) : gammq(0.5, template_funcs::DSQR(x) ) ) ; 
+}
+
 void special::two_F_one(double a, double b, double c, double x, double &F, double &dF)
 {
 	// Implementation of the hypergeometric function, {2}_F_{1}(a, b, c; z)
@@ -54,6 +193,47 @@ void special::two_F_one(double a, double b, double c, double x, double &F, doubl
 		
 		F = dF = 0.0; 
 
+	}
+}
+
+double special::factorial(int n)
+{
+	// return the factorial of n by recursion
+	// It is possible to represent 170! as a floating point number
+	// Attempting to compute 171! will cause numerical overflow
+	// Factorials up to 22! are exact, 23! and higher are numerically approximate
+	// See NRinC, sect 6.1. 
+	// R. Sheehan 15 - 4 - 2014
+
+	if(n >-1 && n < 170){
+
+		if(n == 0 || n == 1){
+			return 1.0; 
+		}
+		else if(n == 2){
+			return 2.0; 
+		}
+		else if(n == 3){
+			return 6.0; 
+		}
+		else if(n == 4){
+			return 24.0; 
+		}
+		else if(n == 5){
+			return 120.0; 
+		}
+		else if(n == 6){
+			return 720.0; 
+		}
+		else{
+			// recursively compute n!
+			return ( static_cast<double>(n)*factorial(n-1) ); 
+		}
+
+	}
+	else{
+		std::cerr<<"Cannot compute "<<n<<"! by this method\nc.f. gammln routine for factorials of large numbers"; 
+		return 0.0; 
 	}
 }
 

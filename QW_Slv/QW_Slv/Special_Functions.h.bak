@@ -12,6 +12,23 @@
 
 namespace special{
 
+	// Gamma Function
+	double gammln(double x); // Computes the value of ln[gamma(xx)] for xx>0
+
+	// Incomplete Gamma Function
+	double gammp(double a, double x); // Computes the incomplete gamma function P(a,x) from the functions gser and gcf
+	double gammq(double a, double x); // Computes the incomplete gamma function Q(a,x)=1-P(a,x) from the functions gser and gcf
+
+	void gser(double *gamser,double a,double x,double *gln); // Computes the incomplete gamma function P(a,x), calculated by its series representation
+	void gcf(double *gammcf,double a,double x,double *gln); // Computes the incomplete gamma function Q(a,x), calculated by its continued fraction representation
+	
+	// Error Function
+	double erff(double x); // erf(x)
+	double erffc(double x); // 1 - erf(x)
+
+	// Factorial Function
+	double factorial(int n); 
+
 	// Hypergeometric Function
 	void two_F_one(double a, double b, double c, double x, double &F, double &dF); 
 

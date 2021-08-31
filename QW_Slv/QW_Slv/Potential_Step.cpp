@@ -16,7 +16,7 @@ pot_step::pot_step(double particle_mass, double particle_energy, double step_hei
 	set_params(particle_mass, particle_energy, step_height); 
 }
 
-void pot_step::set_params(double particle_mass, double particle_energy, double step_height)
+void pot_step::set_params(double particle_mass, double particle_energy, double step_height, bool loud)
 {
 	// assign values to the parameters for the potential step calculation
 	// particle mass in units of kg
@@ -49,10 +49,12 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 				t1 = (eye * p1 * 1.0e-9) / H_BAR_J; // scale length to nm
 				t2 = (eye * p2 * 1.0e-9) / H_BAR_J; // scale length to nm
 
-				std::cout << "B = " << B << " , C = " << C << " , A = " << A << "\n"; 
-				std::cout << "p1 = " << p1 << " , p2 = " << p2 << "\n"; 
-				std::cout << "t1 = " << t1 << " , t2 = " << t2 << "\n"; 
-				std::cout << "T = " << T << ", R = " << R << ", T+R = " << T + R << "\n";
+				if (loud) {
+					std::cout << "B = " << B << " , C = " << C << " , A = " << A << "\n";
+					std::cout << "p1 = " << p1 << " , p2 = " << p2 << "\n";
+					std::cout << "t1 = " << t1 << " , t2 = " << t2 << "\n";
+					std::cout << "T = " << T << ", R = " << R << ", T+R = " << T + R << "\n";
+				}
 			}
 			else {
 				//particle energy less than step height
@@ -70,10 +72,12 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 				t2 = (-1.0e-9 * p2) / H_BAR_J;
 
 
-				std::cout << "CC = " << CC << " , DD = " << DD << " , B = " << B << "\n";
-				std::cout << "p1 = " << p1 << " , p2 = " << p2 << "\n";
-				std::cout << "t1 = " << t1 << " , t2 = " << t2 << "\n";
-				std::cout << "T = " << T << ", R = " << R << ", T+R = " << T + R << "\n";
+				if (loud) {
+					std::cout << "CC = " << CC << " , DD = " << DD << " , B = " << B << "\n";
+					std::cout << "p1 = " << p1 << " , p2 = " << p2 << "\n";
+					std::cout << "t1 = " << t1 << " , t2 = " << t2 << "\n";
+					std::cout << "T = " << T << ", R = " << R << ", T+R = " << T + R << "\n";
+				}
 			}
 
 			params_defined = true; 

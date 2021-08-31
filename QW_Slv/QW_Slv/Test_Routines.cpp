@@ -19,9 +19,57 @@ void testing::potential_step()
 
 	pot_step classical; 
 
-	classical.set_params(M_ELECTRON_KG, 1, 1.1); 
+	classical.set_params(M_ELECTRON_KG, 1, 1.1, true); 
 
-	classical.compute_wavefunction("Step_Solution.txt"); 
+	//classical.compute_wavefunction("Step_Solution_E_gr_V.txt"); 
+	classical.compute_wavefunction("Step_Solution_E_le_V.txt"); 
+}
+
+void testing::potential_step_ratio()
+{
+	// Look at the variation of R, T as ratio of E to V changes
+	// R. Sheehan 31 - 8 - 2021
+
+	try {
+
+		std::string filename = "Step_Probabilities.txt";
+
+		std::ofstream write;
+
+		write.open(filename.c_str(), std::ios_base::out | std::ios_base::trunc);
+
+		if (write.is_open()) {
+			// perform the calculations
+			// energies in units of eV
+			double step_height = 1.0;
+			double particle_energy = 1.001;
+			double delta_energy = 0.001;
+			double ratio; 
+			double particle_mass = M_ELECTRON_KG;
+
+			pot_step the_step;
+
+			for (int i = 1; i <= 1000; i++) {
+				ratio = particle_energy / step_height; 
+
+				the_step.set_params(particle_mass, particle_energy, step_height); // compute T, R probabilities
+
+				write << std::setprecision(10) << ratio << " , " << the_step.get_T() << " , " << the_step.get_R() << "\n"; 
+
+				particle_energy += delta_energy; // update particle energy
+			}
+
+			write.close(); 
+		}
+		else {
+			std::string reason = "Error: void testing::potential_step_E_gr_V()\n";
+			reason += "Could not open file: " + filename + "\n";
+			throw std::invalid_argument(reason);
+		}
+	}
+	catch (std::invalid_argument& e) {
+		std::cerr << e.what();
+	}
 }
 
 void testing::infinite_well()

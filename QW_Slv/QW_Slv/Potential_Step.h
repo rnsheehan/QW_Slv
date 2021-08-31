@@ -9,11 +9,17 @@ public:
 	pot_step();
 	pot_step(double particle_mass, double particle_energy, double step_height);
 
-	void set_params(double particle_mass, double particle_energy, double step_height); 
+	void set_params(double particle_mass, double particle_energy, double step_height, bool loud = false);
 
 	std::complex<double> wavefunction(double position); 
 
 	void compute_wavefunction(std::string filename); 
+
+	// getters
+	inline double get_E() { return E;  }
+	inline double get_V() { return V;  }
+	inline double get_T() { return T;  }
+	inline double get_R() { return R;  }
 
 private:
 	bool high; // boolean to decide whether E > V or E < V

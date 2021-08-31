@@ -10,6 +10,8 @@ namespace testing{
 
 	void potential_step(); 
 
+	void potential_step_ratio(); 
+
 	void infinite_well(); 
 
 }

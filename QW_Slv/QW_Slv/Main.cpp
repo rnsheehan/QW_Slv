@@ -10,6 +10,8 @@ int main(int argc, char* argv[])
 
 	testing::potential_step(); 
 
+	//testing::potential_step_ratio();
+
 	//testing::infinite_well(); 
 
 	std::cout<<"Press enter to close\n"; 

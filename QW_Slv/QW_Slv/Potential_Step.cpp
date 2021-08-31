@@ -112,7 +112,7 @@ std::complex<double> pot_step::wavefunction(double position)
 				}
 				else {
 					// outgoing sine wave
-					return ( A * exp(t2 * position) ); 
+					return ( A * exp( t2 * position) ); 
 				}
 			}
 			else {

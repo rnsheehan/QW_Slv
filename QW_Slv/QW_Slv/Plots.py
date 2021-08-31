@@ -27,6 +27,7 @@ def wfn_plot():
     ERR_STATEMENT = "Error: " + MOD_NAME_STR + FUNC_NAME
 
     try:
+        #filename = "Step_Solution_E_le_V.txt"
         filename = "Step_Solution_E_gr_V.txt"
             
         if glob.glob(filename):
@@ -49,7 +50,7 @@ def wfn_plot():
                 args.loud = True
                 args.crv_lab_list = labels
                 args.mrk_list = marks
-                args.x_label = 'Position ($\mu$m)'
+                args.x_label = 'Position (nm)'
                 args.y_label = '$\psi$(x)'
                 #args.plt_title = 'Wavefunction E < V'
                 args.plt_title = 'Wavefunction E > V'
@@ -66,7 +67,7 @@ def wfn_plot():
                 args.loud = True
                 args.curve_label = 'M$_{1}$'
                 args.marker = Plotting.labs_lins[0]
-                args.x_label = 'Position ($\mu$m)'
+                args.x_label = 'Position (nm)'
                 args.y_label = '$\psi$(x)'
                 args.fig_name = filename.replace('.txt','')
                 
@@ -136,6 +137,6 @@ if __name__ == '__main__':
     
     print(pwd)
     
-    wfn_plot()
+    #wfn_plot()
     
-    #ratio_plot()
+    ratio_plot()

@@ -19,10 +19,10 @@ void testing::potential_step()
 
 	pot_step classical; 
 
-	classical.set_params(M_ELECTRON_KG, 1, 1.1, true); 
+	classical.set_params(M_ELECTRON_KG, 2, 1, true); 
 
-	//classical.compute_wavefunction("Step_Solution_E_gr_V.txt"); 
-	classical.compute_wavefunction("Step_Solution_E_le_V.txt"); 
+	classical.compute_wavefunction("Step_Solution_E_gr_V.txt"); 
+	//classical.compute_wavefunction("Step_Solution_E_le_V.txt"); 
 }
 
 void testing::potential_step_ratio()

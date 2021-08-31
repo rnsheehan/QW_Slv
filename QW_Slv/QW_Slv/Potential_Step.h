@@ -2,6 +2,7 @@
 #define POTENTIAL_STEP_H
 
 // Implementation of code required to compute solution for potential step
+// Notation taken from "Quantum Theory" by David Bohm
 // R. Sheehan 19 - 8 - 2021
 
 class pot_step {
@@ -25,10 +26,10 @@ private:
 	bool high; // boolean to decide whether E > V or E < V
 	bool params_defined; // boolean to decide if parameters have been assigned to the class
 	double m; // particle mass in units of kg
-	double E; // particle energy in units of eV
-	double V; // step height in units of eV
+	double E; // particle energy in units of J
+	double V; // step height in units of J
 	double p1; // momentum before step
-	double p2; // momentim after step
+	double p2; // momentum after step
 	double T; // transmission probability
 	double R; // reflection probability
 	double A; // solution constant

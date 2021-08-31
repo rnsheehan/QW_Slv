@@ -28,7 +28,8 @@ def wfn_plot():
 
     try:
         #filename = "Step_Solution_E_le_V.txt"
-        filename = "Step_Solution_E_gr_V.txt"
+        #filename = "Step_Solution_E_gr_V.txt"
+        filename = "Barrier_Solution.txt"
             
         if glob.glob(filename):
             # import the dataset
@@ -37,12 +38,12 @@ def wfn_plot():
             if len(data) > 2:      
                 # multi-curve plot required
                 hv_data = []; labels = []; marks = [];
-                for i in range(1, len(data), 1):
+                for i in range(1, len(data)-1, 1):
                     hv_data.append([data[0], data[i]]); 
                     #labels.append('M$_{%(v1)d}$'%{"v1":i}); 
                     marks.append(Plotting.labs_lins[(i-1)%len(Plotting.labs_lins)]); 
                 
-                labels.append("$\psi^{re}$"); labels.append("$\psi^{im}$"); labels.append("$\psi^{*}\psi$"); 
+                labels.append("$\psi^{re}$"); labels.append("$\psi^{im}$"); #labels.append("$\psi^{*}\psi$"); 
                 
                 # make the plot of the data set
                 args = Plotting.plot_arg_multiple()
@@ -53,7 +54,8 @@ def wfn_plot():
                 args.x_label = 'Position (nm)'
                 args.y_label = '$\psi$(x)'
                 #args.plt_title = 'Wavefunction E < V'
-                args.plt_title = 'Wavefunction E > V'
+                #args.plt_title = 'Wavefunction E > V'
+                args.plt_title = 'Barrier Wavefunction E < V'
                 args.fig_name = filename.replace('.txt','')
 
                 Plotting.plot_multiple_curves(hv_data, args)
@@ -137,6 +139,6 @@ if __name__ == '__main__':
     
     print(pwd)
     
-    #wfn_plot()
+    wfn_plot()
     
-    ratio_plot()
+    #ratio_plot()

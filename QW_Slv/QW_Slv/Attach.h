@@ -48,6 +48,7 @@ static const std::complex<double> one(1.0, 0.0);
 #include "Useful.h"
 
 #include "Potential_Step.h"
+#include "Potential_Barrier.h"
 #include "Infinite_Well.h"
 #include "Finite_Well.h"
 

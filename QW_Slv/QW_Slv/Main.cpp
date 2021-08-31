@@ -8,9 +8,11 @@ int main(int argc, char* argv[])
 {
 	//testing::energy_unit_conversion(); 
 
-	testing::potential_step(); 
+	//testing::potential_step(); 
 
 	//testing::potential_step_ratio();
+
+	testing::potential_barrier(); 
 
 	//testing::infinite_well(); 
 

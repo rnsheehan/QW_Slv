@@ -67,6 +67,7 @@
     <ClInclude Include="Attach.h" />
     <ClInclude Include="Finite_Well.h" />
     <ClInclude Include="Infinite_Well.h" />
+    <ClInclude Include="Potential_Barrier.h" />
     <ClInclude Include="Potential_Step.h" />
     <ClInclude Include="Templates.h" />
     <ClInclude Include="Test_Routines.h" />
@@ -76,6 +77,7 @@
     <ClCompile Include="Finite_Well.cpp" />
     <ClCompile Include="Infinite_Well.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Potential_Barrier.cpp" />
     <ClCompile Include="Potential_Step.cpp" />
     <ClCompile Include="Test_Routines.cpp" />
     <ClCompile Include="Useful.cpp" />

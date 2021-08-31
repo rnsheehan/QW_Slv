@@ -72,6 +72,18 @@ void testing::potential_step_ratio()
 	}
 }
 
+void testing::potential_barrier()
+{
+	// test the implementation of the code for the potential barrier solution
+	// R. Sheehan 31 - 8 - 2021
+
+	pot_barr classical;
+
+	classical.set_params(M_ELECTRON_KG, 1, 1.25, 0.5, true); 
+
+	classical.compute_wavefunction("Barrier_Solution.txt");
+}
+
 void testing::infinite_well()
 {
 	// test the implementation of the code for the infinite square well

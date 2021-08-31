@@ -2,6 +2,9 @@
 #include "Attach.h"
 #endif
 
+// Class definitions for the potential step class
+// R. Sheehan 19 - 8 - 2021
+
 pot_step::pot_step()
 {
 	// default constructor
@@ -20,7 +23,7 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 {
 	// assign values to the parameters for the potential step calculation
 	// particle mass in units of kg
-	// energies in units of eV
+	// energies input in units of eV but converted to J for sake of calculation
 
 	try {
 		bool c1 = particle_mass > 0.0 ? true : false;
@@ -46,8 +49,8 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 				T = (4.0 * p1 * p2) / (template_funcs::DSQR(psum)); 
 				R = (template_funcs::DSQR(pdiff)) / (template_funcs::DSQR(psum)); 
 				
-				t1 = (eye * p1 * 1.0e-9) / H_BAR_J; // scale length to nm
-				t2 = (eye * p2 * 1.0e-9) / H_BAR_J; // scale length to nm
+				t1 = (eye * p1 * 1.0e-9) / H_BAR_J; // momentum before the step, scale length to nm
+				t2 = (eye * p2 * 1.0e-9) / H_BAR_J; // momentum after the step, scale length to nm
 
 				if (loud) {
 					std::cout << "B = " << B << " , C = " << C << " , A = " << A << "\n";
@@ -68,8 +71,8 @@ void pot_step::set_params(double particle_mass, double particle_energy, double s
 				R = 1.0; 
 				T = 0.0; 
 				
-				t1 = (eye * p1 * 1.0e-9) / H_BAR_J;
-				t2 = (-1.0e-9 * p2) / H_BAR_J;
+				t1 = (eye * p1 * 1.0e-9) / H_BAR_J; // momentum before the step, scale length to nm
+				t2 = (-1.0e-9 * p2) / H_BAR_J; // momentum after the step, scale length to nm
 
 
 				if (loud) {
@@ -128,7 +131,7 @@ std::complex<double> pot_step::wavefunction(double position)
 			}
 		}
 		else { 
-			std::string reason = "Error: double pot_step::wavefunction(double position)\n"; 
+			std::string reason = "Error: std::complex<double> pot_step::wavefunction(double position)\n"; 
 			reason += "No parameters defined for pot_step class\n"; 
 			throw std::invalid_argument(reason);
 		}

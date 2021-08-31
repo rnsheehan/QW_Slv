@@ -12,6 +12,8 @@ namespace testing{
 
 	void potential_step_ratio(); 
 
+	void potential_barrier(); 
+
 	void infinite_well(); 
 
 }

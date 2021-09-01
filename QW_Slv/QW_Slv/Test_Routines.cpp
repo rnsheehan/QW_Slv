@@ -79,7 +79,7 @@ void testing::potential_barrier()
 
 	pot_barr classical;
 
-	classical.set_params(M_ELECTRON_KG, 1, 1.25, 0.5, true); 
+	classical.set_params(M_ELECTRON_KG, 1, 1.1, 1, true); 
 
 	classical.compute_wavefunction("Barrier_Solution.txt");
 }
